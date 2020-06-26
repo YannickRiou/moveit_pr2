@@ -561,13 +561,8 @@ Visualization Manager:
         Goal State Color: 250; 128; 0
         Interactive Marker Size: 0
         Joint Violation Color: 255; 0; 255
-<<<<<<< HEAD
-        Planning Group: right_arm
-        Query Goal State: true
-=======
         Planning Group: left_arm
         Query Goal State: false
->>>>>>> kinetic-devel
         Query Start State: false
         Show Workspace: false
         Start State Alpha: 1
@@ -1582,3 +1577,4 @@ Window Geometry:
   Width: 1853
   X: 67
   Y: 24
+
