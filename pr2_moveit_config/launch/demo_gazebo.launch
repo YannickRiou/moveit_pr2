@@ -8,8 +8,6 @@
   <!-- By default, we are not in debug mode -->
   <arg name="debug" default="false" />
 
- <node pkg="tf" type="static_transform_publisher" name="virtual_joint_broadcaster_0" args="0 0 0 0 0 0 odom_combined base_footprint 100" />
-
   <!--
   By default, hide joint_state_publisher's GUI
 
@@ -20,9 +18,22 @@
   -->
   <arg name="use_gui" default="false" />
 
+  <!-- Gazebo specific options -->
+  <arg name="gazebo_gui" default="true"/>
+  <arg name="paused" default="false"/>
+  <!-- By default, use the urdf location provided from the package -->
+  <arg name="urdf_path" default="/home/yriou/Documents/URDF-PR2/robot_calibrated_2019_11_19_16_58.xml"/>
+
+  <!-- launch the gazebo simulator and spawn the robot -->
+  <include file="$(find pr2_moveit_newurdf)/launch/gazebo.launch" >
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="gazebo_gui" value="$(arg gazebo_gui)"/>
+    <arg name="urdf_path" value="$(arg urdf_path)"/>
+  </include>
+
   <!-- Load the URDF, SRDF and other .yaml configuration files on the param server -->
   <include file="$(find pr2_moveit_newurdf)/launch/planning_context.launch">
-    <arg name="load_robot_description" value="true"/>
+    <arg name="load_robot_description" value="false"/>
   </include>
 
   <!-- If needed, broadcast static tf for robot root -->
@@ -31,7 +42,7 @@
   <!-- We do not have a robot connected, so publish fake joint states -->
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
     <param name="use_gui" value="$(arg use_gui)"/>
-    <rosparam param="source_list">[move_group/fake_controller_joint_states]</rosparam>
+    <rosparam param="source_list">[/joint_states]</rosparam>
   </node>
 
   <!-- Given the published joint states, publish tf for the robot links -->
@@ -43,7 +54,7 @@
     <arg name="fake_execution" value="false"/>
     <arg name="info" value="true"/>
     <arg name="debug" value="$(arg debug)"/>
-  </include>
+  </include>  
 
   <!-- Run Rviz and load the default config to see the state of the move_group node -->
   <include file="$(find pr2_moveit_newurdf)/launch/moveit_rviz.launch">
