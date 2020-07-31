@@ -28,7 +28,7 @@ controller_list:
 
   - name: head_traj_controller
     action_ns: follow_joint_trajectory
-    type: FollowJointTrajectory    
+    type: FollowJointTrajectory
     default: true
     joints:
       - head_pan_joint
@@ -66,5 +66,3 @@ controller_list:
     default: true
     joints:
       - torso_lift_joint
-  
-   

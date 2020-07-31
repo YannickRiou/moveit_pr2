@@ -28,6 +28,9 @@ planner_configs:
     type: geometric::RRT
     range: 0.0  # Max motion added to tree. ==> maxDistance_ default: 0.0, if 0.0, set on setup()
     goal_bias: 0.05  # When close to goal select goal, with this probability? default: 0.05
+    longest_valid_segment_fraction: 0.001
+    maximum_waypoint_distance : 0.01
+
   RRTConnect:
     type: geometric::RRTConnect
     range: 0.0  # Max motion added to tree. ==> maxDistance_ default: 0.0, if 0.0, set on setup()
@@ -41,7 +44,7 @@ planner_configs:
     range: 0.0  # Max motion added to tree. ==> maxDistance_ default: 0.0, if 0.0, set on setup()
     goal_bias: 0.05  # When close to goal select goal, with this probability? default: 0.05
     max_states_failed: 10  # when to start increasing temp. default: 10
-    temp_change_factor: 2.0  # how much to increase or decrease temp. default: 2.0
+    temp_change_factor: 1.0  # how much to increase or decrease temp. default: 2.0
     min_temperature: 10e-10  # lower limit of temp change. default: 10e-10
     init_temperature: 10e-6  # initial temperature. default: 10e-6
     frountier_threshold: 0.0  # dist new state to nearest neighbor to disqualify as frontier. default: 0.0 set in setup()
@@ -121,7 +124,7 @@ planner_configs:
     dense_delta_fraction: 0.001  # delta fraction for interface detection. default: 0.001
     max_failures: 5000  # maximum consecutive failure limit. default: 5000
 left_arm:
-  default_planner_config: "RRT"
+  default_planner_config: "TRRT"
   planner_configs:
     - SBL
     - EST
@@ -149,7 +152,7 @@ left_arm:
   projection_evaluator: joints(l_shoulder_pan_joint,l_shoulder_lift_joint)
   longest_valid_segment_fraction: 0.005
 right_arm:
-  default_planner_config: "RRT"
+  default_planner_config: "TRRT"
   planner_configs:
     - SBL
     - EST
@@ -205,7 +208,7 @@ left_gripper:
   projection_evaluator: joints(l_gripper_l_finger_joint,l_gripper_l_finger_tip_joint)
   longest_valid_segment_fraction: 0.005
 head:
-  default_planner_config: "RRT"
+  default_planner_config: "TRRT"
   planner_configs:
     - SBL
     - EST
@@ -261,7 +264,7 @@ right_gripper:
   projection_evaluator: joints(r_gripper_l_finger_joint,r_gripper_l_finger_tip_joint)
   longest_valid_segment_fraction: 0.005
 torso:
-  default_planner_config: "RRT"
+  default_planner_config: "TRRT"
   planner_configs:
     - SBL
     - EST
@@ -288,60 +291,117 @@ torso:
     - SPARStwo
 
 right_arm_torso:
-  default_planner_config: "RRT"
+  default_planner_config: "TRRT"
   planner_configs:
-    - SBLkConfigDefault
-    - LBKPIECEkConfigDefault
-    - RRTkConfigDefault
-    - TRRTkConfigDefault
-    - RRTConnectkConfigDefault
-    - ESTkConfigDefault
-    - KPIECEkConfigDefault
-    - BKPIECEkConfigDefault
-    - RRTStarkConfigDefault
+    - SBL
+    - EST
+    - LBKPIECE
+    - BKPIECE
+    - KPIECE
+    - RRT
+    - RRTConnect
+    - RRTstar
+    - TRRT
+    - PRM
+    - PRMstar
+    - FMT
+    - BFMT
+    - PDST
+    - STRIDE
+    - BiTRRT
+    - LBTRRT
+    - BiEST
+    - ProjEST
+    - LazyPRM
+    - LazyPRMstar
+    - SPARS
+    - SPARStwo
   projection_evaluator: joints(r_shoulder_pan_joint,r_shoulder_lift_joint)
   longest_valid_segment_fraction: 0.05
 
 left_arm_torso:
-  default_planner_config: "RRT"
+  default_planner_config: "TRRT"
   planner_configs:
-    - SBLkConfigDefault
-    - LBKPIECEkConfigDefault
-    - RRTkConfigDefault
-    - TRRTkConfigDefault
-    - RRTConnectkConfigDefault
-    - ESTkConfigDefault
-    - KPIECEkConfigDefault
-    - BKPIECEkConfigDefault
-    - RRTStarkConfigDefault
+    - SBL
+    - EST
+    - LBKPIECE
+    - BKPIECE
+    - KPIECE
+    - RRT
+    - RRTConnect
+    - RRTstar
+    - TRRT
+    - PRM
+    - PRMstar
+    - FMT
+    - BFMT
+    - PDST
+    - STRIDE
+    - BiTRRT
+    - LBTRRT
+    - BiEST
+    - ProjEST
+    - LazyPRM
+    - LazyPRMstar
+    - SPARS
+    - SPARStwo
   projection_evaluator: joints(l_shoulder_pan_joint,l_shoulder_lift_joint)
   longest_valid_segment_fraction: 0.05
 
 arms:
-  default_planner_config: "RRT"
+  default_planner_config: "TRRT"
   planner_configs:
-    - SBLkConfigDefault
-    - LBKPIECEkConfigDefault
-    - RRTkConfigDefault
-    - TRRTkConfigDefault
-    - RRTConnectkConfigDefault
-    - ESTkConfigDefault
-    - KPIECEkConfigDefault
-    - BKPIECEkConfigDefault
-    - RRTStarkConfigDefault
+    - SBL
+    - EST
+    - LBKPIECE
+    - BKPIECE
+    - KPIECE
+    - RRT
+    - RRTConnect
+    - RRTstar
+    - TRRT
+    - PRM
+    - PRMstar
+    - FMT
+    - BFMT
+    - PDST
+    - STRIDE
+    - BiTRRT
+    - LBTRRT
+    - BiEST
+    - ProjEST
+    - LazyPRM
+    - LazyPRMstar
+    - SPARS
+    - SPARStwo
   longest_valid_segment_fraction: 0.05
   projection_evaluator: joints(r_shoulder_pan_joint,l_shoulder_pan_joint)
 
 whole_body:
+  default_planner_config: "TRRT"
   planner_configs:
-    - SBLkConfigDefault
-    - LBKPIECEkConfigDefault
-    - RRTkConfigDefault
-    - TRRTkConfigDefault
-    - RRTConnectkConfigDefault
-    - ESTkConfigDefault
-    - KPIECEkConfigDefault
-    - BKPIECEkConfigDefault
-    - RRTStarkConfigDefault
+    - SBL
+    - EST
+    - LBKPIECE
+    - BKPIECE
+    - KPIECE
+    - RRT
+    - RRTConnect
+    - RRTstar
+    - TRRT
+    - PRM
+    - PRMstar
+    - FMT
+    - BFMT
+    - PDST
+    - STRIDE
+    - BiTRRT
+    - LBTRRT
+    - BiEST
+    - ProjEST
+    - LazyPRM
+    - LazyPRMstar
+    - SPARS
+    - SPARStwo
   longest_valid_segment_fraction: 0.05
   projection_evaluator: joints(r_shoulder_pan_joint,l_shoulder_pan_joint)

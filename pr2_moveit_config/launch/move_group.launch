@@ -25,11 +25,13 @@
     <arg name="pipeline" value="ompl" />
   </include>
 
+  <arg name="fake_exe" default="false" />
   <!-- Trajectory Execution Functionality -->
   <include ns="move_group" file="$(find pr2_moveit_config)/launch/trajectory_execution.launch.xml" if="$(arg allow_trajectory_execution)">
     <arg name="moveit_manage_controllers" value="true" />
     <arg name="moveit_controller_manager" value="pr2" unless="$(arg fake_execution)"/>
     <arg name="moveit_controller_manager" value="fake" if="$(arg fake_execution)"/>
+    <arg name="is_simu" value="$(arg fake_exe)"/>
   </include>
 
   <!-- Sensors Functionality -->
@@ -57,4 +59,3 @@
   </node>
 
 </launch>
-
