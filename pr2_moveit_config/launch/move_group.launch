@@ -1,6 +1,8 @@
 <launch>
 
-  <include file="$(find pr2_moveit_config)/launch/planning_context.launch" />
+  <include file="$(find pr2_moveit_config)/launch/planning_context.launch">
+  	<arg name="is_simu" value="$(arg fake_exe)"/>
+  </include>
 
   <!-- GDB Debug Option -->
   <arg name="debug" default="false" />

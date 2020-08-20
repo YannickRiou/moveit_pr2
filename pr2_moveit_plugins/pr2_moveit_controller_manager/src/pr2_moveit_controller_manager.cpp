@@ -50,7 +50,7 @@
 namespace pr2_moveit_controller_manager
 {
 /// Maximum effort the PR2 gripper is allowed to exert (read as 'very large value'); this is PR2 specific
-static const double DEFAULT_MAX_GRIPPER_EFFORT = 15;
+static const double DEFAULT_MAX_GRIPPER_EFFORT = 10000.0;
 
 /// The distance between the PR2 gripper fingers when fully open (in m); this is PR2 specific
 static const double GRIPPER_OPEN = 0.086;
@@ -233,7 +233,10 @@ private:
   {
     // the gripper action reports failure when closing the gripper and an object is inside
     if (state == actionlib::SimpleClientGoalState::ABORTED && closing_)
+    {
       finishControllerExecution(actionlib::SimpleClientGoalState::SUCCEEDED);
+      ROS_ERROR_STREAM("GRIPPER IS CLOSING BUT ITS OK !!!!!!!!!!!!!");
+    }
     else
       finishControllerExecution(state);
   }
