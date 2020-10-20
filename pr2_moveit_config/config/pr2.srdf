@@ -247,10 +247,6 @@
 
     <virtual_joint name="world_joint" type="planar" parent_frame="odom_combined" child_link="base_footprint" />
     <!--PASSIVE JOINT: Purpose: this element is used to mark joints that are not actuated-->
-    <!--passive_joint name="world_joint" /-->
-    <!--virtual_joint name="virtual_joint" type="fixed" parent_frame="odom_combined" child_link="base_footprint" /-->
-
-    <!--PASSIVE JOINT: Purpose: this element is used to mark joints that are not actuated-->
     <passive_joint name="bl_caster_rotation_joint" />
     <passive_joint name="bl_caster_l_wheel_joint" />
     <passive_joint name="bl_caster_r_wheel_joint" />
