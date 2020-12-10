@@ -1,8 +1,12 @@
 <launch>
-
-  <node pkg="tf" type="static_transform_publisher" name="virtual_joint_broadcaster_0" args="0 0 0 0 0 0 odom_combined base_footprint 100" />
-
   <arg name="fake" default="false" />
+
+  <group if="$(arg fake)">
+    <node pkg="tf" type="static_transform_publisher" name="virtual_joint_broadcaster_0" args="0 0 0 0 0 0 odom_combined base_footprint 100" />
+  </group>
+
+
+  
   <include file="$(find pr2_moveit_config)/launch/move_group.launch">
     <arg name="fake_exe" value="$(arg fake)"/>
   </include>
