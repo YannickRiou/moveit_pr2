@@ -137,7 +137,7 @@
         <joint name="r_upper_arm_roll_joint" value="-0.3953" />
         <joint name="r_wrist_flex_joint" value="-0.8243" />
         <joint name="r_wrist_roll_joint" value="3.1415" />
-        <joint name="torso_lift_joint" value="0.135" />
+        <joint name="torso_lift_joint" value="0.143" />
     </group_state>
     <group_state name="arms_home" group="arms">
         <joint name="l_elbow_flex_joint" value="-1.5332" />
