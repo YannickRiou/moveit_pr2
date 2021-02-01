@@ -1,5 +1,6 @@
 <launch>
 
+  <arg name="fake_exe" default="false" />
   <include file="$(find pr2_moveit_config)/launch/planning_context.launch">
   	<arg name="is_simu" value="$(arg fake_exe)"/>
   </include>
@@ -17,7 +18,6 @@
 
   <!-- move_group settings -->
   <arg name="allow_trajectory_execution" default="true"/>
-  <arg name="fake_execution" default="false"/>
   <arg name="max_safe_path_cost" default="1"/>
   <arg name="jiggle_fraction" default="0.05" />
   <arg name="publish_monitored_planning_scene" default="true"/>
@@ -27,13 +27,12 @@
     <arg name="pipeline" value="ompl" />
   </include>
 
-  <arg name="fake_exe" default="false" />
+
   <!-- Trajectory Execution Functionality -->
   <include ns="move_group" file="$(find pr2_moveit_config)/launch/trajectory_execution.launch.xml" if="$(arg allow_trajectory_execution)">
     <arg name="moveit_manage_controllers" value="true" />
-    <arg name="moveit_controller_manager" value="pr2" unless="$(arg fake_execution)"/>
-    <arg name="moveit_controller_manager" value="fake" if="$(arg fake_execution)"/>
-    <arg name="is_simu" value="$(arg fake_exe)"/>
+    <arg name="moveit_controller_manager" value="pr2" unless="$(arg fake_exe)"/>
+    <arg name="moveit_controller_manager" value="fake" if="$(arg fake_exe)"/>
   </include>
 
   <!-- Sensors Functionality -->

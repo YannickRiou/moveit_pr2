@@ -9,9 +9,6 @@
 
   <!-- Load the robot specific controller manager; this sets the moveit_controller_manager ROS parameter -->
   <arg name="moveit_controller_manager" default="pr2" />
-  <arg name="is_simu" default="false" />
-  <include file="$(find pr2_moveit_config)/launch/$(arg moveit_controller_manager)_moveit_controller_manager.launch.xml">
-    <arg name="simu" value="$(arg is_simu)" />
-  </include>
+  <include file="$(find pr2_moveit_config)/launch/$(arg moveit_controller_manager)_moveit_controller_manager.launch.xml"/>
 
 </launch>
