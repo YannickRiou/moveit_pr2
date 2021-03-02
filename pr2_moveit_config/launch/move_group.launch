@@ -1,6 +1,7 @@
 <launch>
 
   <arg name="fake_exe" default="false" />
+
   <include file="$(find pr2_moveit_config)/launch/planning_context.launch">
   	<arg name="is_simu" value="$(arg fake_exe)"/>
   </include>
@@ -18,6 +19,7 @@
 
   <!-- move_group settings -->
   <arg name="allow_trajectory_execution" default="true"/>
+  <arg name="allow_octomap" default="false"/> 
   <arg name="max_safe_path_cost" default="1"/>
   <arg name="jiggle_fraction" default="0.05" />
   <arg name="publish_monitored_planning_scene" default="true"/>
@@ -36,9 +38,13 @@
   </include>
 
   <!-- Sensors Functionality -->
-  <include ns="move_group" file="$(find pr2_moveit_config)/launch/sensor_manager.launch.xml" if="$(arg allow_trajectory_execution)">
-    <arg name="moveit_sensor_manager" value="pr2" />
+  <include ns="move_group" file="$(find pr2_moveit_config)/launch/sensor_manager.launch.xml" if="$(arg allow_octomap)">
+	<arg name="moveit_sensor_manager" value="pr2" />
   </include>
+
+  <group unless="$(arg allow_octomap)">
+	<rosparam command="delete" param="/move_group/sensors" />
+  </group>
 
   <!-- Start the actual move_group node/action server -->
   <node name="move_group" launch-prefix="$(arg launch_prefix)" pkg="moveit_ros_move_group" type="move_group" respawn="false" output="screen" args="$(arg command_args)">
