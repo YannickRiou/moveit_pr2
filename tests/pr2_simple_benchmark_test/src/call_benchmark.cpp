@@ -57,7 +57,7 @@ int main(int argc, char** argv)
   boost::shared_ptr<tf::TransformListener> tf(new tf::TransformListener());
   planning_scene_monitor::PlanningSceneMonitor psm(ROBOT_DESCRIPTION, tf);
 
-  Eigen::Affine3d t;
+  Eigen::Isometry3d t;
   t = Eigen::Translation3d(0.45, -0.45, 0.7);
   psm.getPlanningScene()->getWorldNonConst()->addToObject("pole", shapes::ShapePtr(new shapes::Box(0.1, 0.1, 1.4)), t);
 

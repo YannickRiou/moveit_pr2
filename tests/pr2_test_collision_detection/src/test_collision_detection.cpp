@@ -94,9 +94,9 @@ void testSimple()
   sleep(1);
 
   std::vector<shapes::ShapeConstPtr> attached_shapes(1, shapes::ShapeConstPtr(new shapes::Box(0.2, 0.1, 0.1)));
-  Eigen::Affine3d t;
+  Eigen::Isometry3d t;
   t.setIdentity();
-  std::vector<Eigen::Affine3d> attached_poses(1, t);
+  std::vector<Eigen::Isometry3d> attached_poses(1, t);
   std::vector<std::string> touch;
   touch.push_back("r_wrist_roll_link");
   touch.push_back("r_forearm_link");

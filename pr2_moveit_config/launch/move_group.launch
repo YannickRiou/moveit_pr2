@@ -29,6 +29,8 @@
     <arg name="pipeline" value="ompl" />
   </include>
 
+    <!-- Load parameters for bi arm manipulation -->
+  <rosparam command="load" file="$(find moveit_dual_arm_planning_tutorials)/config/dual_arm_manipulation.yaml"/>
 
   <!-- Trajectory Execution Functionality -->
   <include ns="move_group" file="$(find pr2_moveit_config)/launch/trajectory_execution.launch.xml" if="$(arg allow_trajectory_execution)">
@@ -55,8 +57,23 @@
     <param name="max_safe_path_cost" value="$(arg max_safe_path_cost)"/>
     <param name="jiggle_fraction" value="$(arg jiggle_fraction)" />
 
+    <!-- Register the dual arm constraint sampler -->
+    <param name="constraint_samplers" value="dual_arm_constraint_sampler::DualArmConstraintSamplerAllocator"/>
+
     <!-- Load  ExecuteTaskSolutionCapability so we can execute found solutions in simulation -->
-    <param name="capabilities" value="move_group/ExecuteTaskSolutionCapability" />
+    <param name="capabilities" value="move_group/MoveGroupCartesianPathService
+				      move_group/MoveGroupExecuteTrajectoryAction
+				      move_group/MoveGroupKinematicsService
+				      move_group/MoveGroupMoveAction
+				      move_group/MoveGroupPickPlaceAction
+				      move_group/MoveGroupPlanService
+				      move_group/MoveGroupQueryPlannersService
+				      move_group/MoveGroupStateValidationService
+				      move_group/MoveGroupGetPlanningSceneService
+				      move_group/ApplyPlanningSceneService
+				      move_group/ClearOctomapService
+              move_group/MoveGroupDualArmPickPlaceAction
+              move_group/ExecuteTaskSolutionCapability" />
 
     <!-- Publish the planning scene of the physical robot so that rviz plugin can know actual robot -->
     <param name="planning_scene_monitor/publish_planning_scene" value="$(arg publish_monitored_planning_scene)" />

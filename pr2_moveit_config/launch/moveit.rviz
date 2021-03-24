@@ -9,16 +9,8 @@ Panels:
         - /MotionPlanning1/Planning Request1
         - /MotionPlanning1/Planned Path1
         - /Motion Planning Tasks1
-        - /Motion Planning Tasks1/Status1
-        - /Motion Planning Tasks1/Robot1
         - /Axes1
         - /Axes2
-        - /Motion Planning Tasks2
-        - /Motion Planning Tasks2/Robot1
-        - /Motion Planning Tasks3
-        - /Motion Planning Tasks3/Robot1
-        - /Motion Planning Tasks4
-        - /Motion Planning Tasks4/Robot1
       Splitter Ratio: 0.742560029
     Tree Height: 457
   - Class: rviz/Help
@@ -28,27 +20,6 @@ Panels:
       - /Current View1
     Name: Views
     Splitter Ratio: 0.5
-  - Class: moveit_task_constructor/Motion Planning Tasks
-    Global Settings:
-      Task View Settings:
-        Task Expansion: All Expanded
-    Name: Motion Planning Tasks
-    Tasks View:
-      property_splitter:
-        - 504
-        - 544
-      solution_sorting:
-        column: 1
-        order: 0
-      solutions_splitter:
-        - 346
-        - 206
-      solutions_view_columns: ~
-      tasks_view_columns:
-        - 161
-        - 61
-        - 61
-        - 61
 Toolbars:
   toolButtonStyle: 2
 Visualization Manager:

@@ -77,7 +77,7 @@ TEST_F(Pr2DistanceFieldPlanningSceneTester, SpeedTestSlow)
   planning_models::RobotState* kstate(planning_scene_monitor_->getPlanningScene()->getCurrentState());
   planning_models::RobotState* ::JointStateGroup* jsg = kstate.getJointStateGroup("right_arm");
 
-  Eigen::Affine3d id = Eigen::Affine3d::Identity();
+  Eigen::Isometry3d id = Eigen::Isometry3d::Identity();
   id.translation().x() = .5;
   id.translation().z() = .7;
   planning_scene_monitor_->getPlanningScene()->getWorldNonConst()->addToObject(
@@ -154,7 +154,7 @@ TEST_F(Pr2DistanceFieldPlanningSceneTester, SpeedTestFast)
   planning_models::RobotState* kstate(planning_scene_monitor_->getPlanningScene()->getCurrentState());
   planning_models::RobotState* ::JointStateGroup* jsg = kstate.getJointStateGroup("right_arm");
 
-  Eigen::Affine3d id = Eigen::Affine3d::Identity();
+  Eigen::Isometry3d id = Eigen::Isometry3d::Identity();
   id.translation().x() = .5;
   id.translation().z() = .7;
   planning_scene_monitor_->getPlanningScene()->getWorldNonConst()->addToObject(

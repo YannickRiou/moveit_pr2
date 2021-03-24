@@ -66,6 +66,12 @@
         <group name="left_arm" />
         <group name="right_arm" />
     </group>
+
+    <group name="arms_torso">
+        <group name="arms" />
+        <group name="torso" />
+    </group>
+
     <group name="left_arm_torso">
         <group name="left_arm" />
         <group name="torso" />
@@ -240,12 +246,30 @@
         <joint name="l_wrist_flex_joint" value="-0.0962141" />
         <joint name="l_wrist_roll_joint" value="-0.0864407" />
     </group_state>
+    <group_state name="LEFT_ARM_INITIAL_POSE" group="left_arm">
+        <joint name="l_elbow_flex_joint" value="-1.2331" />
+        <joint name="l_forearm_roll_joint" value="1.2773" />
+        <joint name="l_shoulder_lift_joint" value="-0.0816" />
+        <joint name="l_shoulder_pan_joint" value="1.5271" />
+        <joint name="l_upper_arm_roll_joint" value="0.3896" />
+        <joint name="l_wrist_flex_joint" value="-1.1335" />
+        <joint name="l_wrist_roll_joint" value="2.2094" />
+    </group_state>
+    <group_state name="RIGHT_ARM_INITIAL_POSE" group="right_arm">
+        <joint name="r_elbow_flex_joint" value="-1.309" />
+        <joint name="r_forearm_roll_joint" value="-1.7261" />
+        <joint name="r_shoulder_lift_joint" value="0" />
+        <joint name="r_shoulder_pan_joint" value="-1.5122" />
+        <joint name="r_upper_arm_roll_joint" value="-0.0269" />
+        <joint name="r_wrist_flex_joint" value="-1.2692" />
+        <joint name="r_wrist_roll_joint" value="1.0357" />
+    </group_state>
 
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
     <end_effector name="left_gripper" parent_link="l_wrist_roll_link" group="left_gripper" parent_group="left_arm" />
     <end_effector name="right_gripper" parent_link="r_wrist_roll_link" group="right_gripper" parent_group="right_arm" />
     <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
-
+   <passive_joint name="world_joint" />
     <virtual_joint name="world_joint" type="planar" parent_frame="odom_combined" child_link="base_footprint" />
     <!--PASSIVE JOINT: Purpose: this element is used to mark joints that are not actuated-->
     <passive_joint name="bl_caster_rotation_joint" />

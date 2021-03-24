@@ -97,7 +97,7 @@ TEST(ConstraintAwareKinematics, getIK)
   for (std::size_t i = 0; i < (unsigned int)number_ik_tests; ++i)
   {
     joint_state_group->setToRandomValues();
-    const Eigen::Affine3d& end_effector_state =
+    const Eigen::Isometry3d& end_effector_state =
         joint_state_group->getRobotState()->getLinkState(ik_link_name)->getGlobalLinkTransform();
     Eigen::Quaterniond quat(end_effector_state.rotation());
     Eigen::Vector3d point(end_effector_state.translation());
