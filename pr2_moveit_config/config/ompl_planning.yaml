@@ -1,4 +1,12 @@
+constraint_approximations_path: ~/constraints_approximation_database
+
 planner_configs:
+  RRTConnectkConfigDualArm:
+    plugin: ompl_interface/DualArmGeometricPlanningContext
+    type: geometric::RRTConnectCustom
+    enforce_joint_model_state_space: true
+    range: 0.5
+
   SBL:
     type: geometric::SBL
     range: 0.0  # Max motion added to tree. ==> maxDistance_ default: 0.0, if 0.0, set on setup()
@@ -376,6 +384,7 @@ arms:
     - LazyPRMstar
     - SPARS
     - SPARStwo
+    - RRTConnectkConfigDualArm
   longest_valid_segment_fraction: 0.05
   projection_evaluator: joints(r_shoulder_pan_joint,l_shoulder_pan_joint)
 
@@ -407,3 +416,11 @@ whole_body:
     - SPARStwo
   longest_valid_segment_fraction: 0.05
   projection_evaluator: joints(r_shoulder_pan_joint,l_shoulder_pan_joint)
+
+arms_torso:
+  default_planner_config: RRTConnectkConfigDualArm
+  planner_configs:
+    - RRTConnectkConfigDualArm
+  longest_valid_segment_fraction: 0.00002
+  projection_evaluator: joints(r_shoulder_pan_joint,l_shoulder_pan_joint)   
+
