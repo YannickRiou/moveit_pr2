@@ -1,14 +1,35 @@
 moveit_pr2
 ==========
 
-MoveIt! Packages for PR2
+MoveIt! Packages for PR2 which contains SRDF files with pre-defined poses, planning groups but also planner configuration and move_group launch files.
 
-## Build Status
+## To launch in demo/simulation (without the robot)
 
-Indigo | Kinetic | Melodic
------- | ------ | ------
-[![Build Status](https://travis-ci.org/ros-planning/moveit_pr2.png?branch=indigo-devel)](https://travis-ci.org/ros-planning/moveit_pr2) | [![Build Status](https://travis-ci.org/ros-planning/moveit_pr2.png?branch=kinetic-devel)](https://travis-ci.org/ros-planning/moveit_pr2) | N/A
+`
+roslaunch pr2_moveit_config demo.launch 
+`
 
-## PR2 MoveIt! Tutorials
+It will launch the move_group node, load the robot description and a fake joint_state_publisher. Rviz will also open to be able to control the robot directly.
 
-Note that the PR2 tutorials have been moved to the consolidated [moveit_tutorials](https://github.com/ros-planning/moveit_tutorials) with the rest of the documentation
+## To launch when working on the real robot
+
+To launch the move_group node : 
+`
+roslaunch pr2_moveit_config pr2_moveit.launch 
+`
+If you want to enable octomap, just set the following parameter to true : 
+
+`
+roslaunch pr2_moveit_config pr2_moveit.launch use_octomap:=true
+`
+
+To launch rviz : 
+`
+roslaunch pr2_moveit_config moveit_rviz.launch
+`
+
+## To launch the moveit setup assistant 
+
+`
+roslaunch pr2_moveit_config setup_assistant.launch
+`
